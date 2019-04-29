@@ -16,8 +16,12 @@ typedef struct AdjList{
 
 typedef struct Graph{
     int nodesCount;
-    struct AdjList* nodes;
+    struct AdjList** nodes;
 }Graph;
+
+Graph* initializeGraph(int nodesCount);
+void freeGraph(Graph** graph);
+void freeAdjList(AdjList** list);
 
 
 #endif
