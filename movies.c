@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Graph.h"
+#include "Tasks.h"
 
 int main(int argc, char* argv[]){
 
