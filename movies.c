@@ -11,7 +11,7 @@ int main(int argc, char* argv[]){
         char* inputFile = argv[2];
         char* outputFile = argv[3];
 
-        Graph* graph = initializeGraph(0);
+        printf("%s\n",task);
 
         FILE* input = fopen(inputFile,"r+");
         if(!input){
@@ -39,8 +39,6 @@ int main(int argc, char* argv[]){
             fprintf(stdout,"No relevant task\n");
             exit(0);
         }
-
-        freeGraph(&graph);
 
     }else{
         fprintf(stdout,"You did not provide enough arguments\n");

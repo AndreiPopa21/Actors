@@ -4,11 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Graph.h"
+#include "Utils.h"
 
-void TaskOne(Graph** graph);
-void TaskTwo(Graph** graph);
-void TaskThree(Graph** graph);
-void Bonus(Graph** graph);
+void TaskOne();
+void TaskTwo();
+void TaskThree();
+void Bonus();
 
 #endif
