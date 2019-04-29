@@ -6,4 +6,9 @@
 #include <string.h>
 #include "Graph.h"
 
+void TaskOne(Graph** graph);
+void TaskTwo(Graph** graph);
+void TaskThree(Graph** graph);
+void Bonus(Graph** graph);
+
 #endif
