@@ -4,7 +4,7 @@ build: movies.c labirint.c
 clean:
 	rm -f movies
 	rm -f labirint
-run movies:
+run_movies: movies
 	./movies
-run labirint:
+run_labirint: labirint
 	./labirint
