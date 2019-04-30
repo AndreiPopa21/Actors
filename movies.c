@@ -47,14 +47,25 @@ int main(int argc, char* argv[]){
         char* name2 = "Sansa";
         char* name3 = "Bran";
         char* name4 = "Arya";
-        addListFor(&graph,name1);
-        addListFor(&graph,name2);
-        addListFor(&graph,name3);
-        addEdge(&graph,name2,name3);
+        AdjList* list = (AdjList*)calloc(1,sizeof(AdjList));
+        pushNode(&list,name1);
+        pushNode(&list,name2);
+        pushNode(&list,name3);
+        pushNode(&list,name1);
+        createLists(&graph,&list);
+        pairActorsInList(&graph,&list);
+        freeAdjList(&list);
+        
+        list = (AdjList*)calloc(1,sizeof(AdjList));
+        pushNode(&list,name2);
+        pushNode(&list,name3);
+        pushNode(&list,name4);
+        createLists(&graph,&list);
+        pairActorsInList(&graph,&list);
+        freeAdjList(&list);
         
 
         printGraph(&graph);
-
         freeGraph(&graph);
 
     }else{

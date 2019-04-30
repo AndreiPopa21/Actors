@@ -54,24 +54,31 @@ void addEdge(Graph** graph, char* actorName, char* partnerName){
         fprintf(stdout,"NULL names for adding edge\n");
         return;
     }
-    int i = 0;
-    int currentSize  = (*graph)->currentSize;
-    while(i < currentSize){
-        char* some = (*graph)->lists[i]->head->actorName;
-        if(!strcmp(some,actorName)){
-            pushNode(&((*graph)->lists[i]),partnerName);
-            break;
+
+    if(!checkEdgeDuplicate(graph,actorName,partnerName)){
+        int i = 0;
+        int currentSize  = (*graph)->currentSize;
+        while(i < currentSize){
+            char* some = (*graph)->lists[i]->head->actorName;
+            if(!strcmp(some,actorName)){
+                pushNode(&((*graph)->lists[i]),partnerName);
+                break;
+            }
+            i++;
         }
-        i++;
     }
-    i = 0;
-    while(i < currentSize){
-        char* some = (*graph)->lists[i]->head->actorName;
-        if(!strcmp(some,partnerName)){
-            pushNode(&((*graph)->lists[i]),actorName);
-            break;
+
+    if(!checkEdgeDuplicate(graph,partnerName,actorName)){
+        int i = 0;
+        int currentSize  = (*graph)->currentSize;
+        while(i < currentSize){
+            char* some = (*graph)->lists[i]->head->actorName;
+            if(!strcmp(some,partnerName)){
+                pushNode(&((*graph)->lists[i]),actorName);
+                break;
+            }
+            i++;
         }
-        i++;
     }
 }
 
@@ -114,6 +121,40 @@ int checkNameDuplicate(Graph** graph, char* name){
         char* actorName = (*graph)->lists[i]->head->actorName;
         if(!strcmp(name,actorName)){
             hasDuplicate = 1;
+        }
+    }
+    if(hasDuplicate){
+        return 1;
+    }
+    return 0;
+}
+
+int checkEdgeDuplicate(Graph** graph, char* first, char* second){
+    if(!(*graph)){
+        return 1;
+    }
+    if(!((*graph)->lists)){
+        return 1;
+    }
+    if((first[0]=='\0')||(second[0]=='\0')){
+        return 1;
+    }
+
+    int hasDuplicate = 0;
+    int currentSize = (*graph)->currentSize;
+    int i;
+    for( i = 0; i < currentSize; i++){
+        char* some = (*graph)->lists[i]->head->actorName;
+        if(!strcmp(some,first)){
+            AdjListNode* iter = (*graph)->lists[i]->head;
+            while(iter){
+                if(!strcmp(iter->actorName,second)){
+                    hasDuplicate = 1;
+                    break;
+                }
+                iter = iter -> next;
+            }
+            break;
         }
     }
     if(hasDuplicate){
@@ -175,5 +216,24 @@ void pairActorsInList(Graph** graph, AdjList** list){
             secondaryIter =secondaryIter ->next;
         }
         primaryIter = primaryIter -> next;
+    }
+}
+
+void createLists(Graph** graph, AdjList** list){
+    if(!(*graph)){
+        return;
+    }
+    if(!(*list)){
+        return;
+    }
+
+    if(!((*list)->head)){
+        return;
+    }
+
+    AdjListNode* iter = (*list)->head;
+    while(iter){
+        addListFor(graph,iter->actorName);
+        iter = iter -> next;
     }
 }
