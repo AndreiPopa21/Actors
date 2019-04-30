@@ -29,6 +29,7 @@ int main(int argc, char* argv[]){
 
         if(!strcmp(task,"-c1")){
             fprintf(stdout,"First task\n");
+            TaskOne(inputFile,outputFile);
         }else if(!strcmp(task,"-c2")){
             fprintf(stdout,"Second task\n");
         }else if(!strcmp(task,"-c3")){

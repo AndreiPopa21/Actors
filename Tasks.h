@@ -6,7 +6,7 @@
 #include <string.h>
 #include "Utils.h"
 
-void TaskOne();
+void TaskOne(char* input, char* output);
 void TaskTwo();
 void TaskThree();
 void Bonus();
