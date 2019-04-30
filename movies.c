@@ -29,7 +29,7 @@ int main(int argc, char* argv[]){
 
         if(!strcmp(task,"-c1")){
             fprintf(stdout,"First task\n");
-            TaskOne(inputFile,outputFile);
+            /*TaskOne(inputFile,outputFile);*/
         }else if(!strcmp(task,"-c2")){
             fprintf(stdout,"Second task\n");
         }else if(!strcmp(task,"-c3")){
@@ -40,8 +40,7 @@ int main(int argc, char* argv[]){
             fprintf(stdout,"No relevant task\n");
             exit(0);
         }
-
-
+        
     }else{
         fprintf(stdout,"You did not provide enough arguments\n");
         exit(0);
