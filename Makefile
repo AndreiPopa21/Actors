@@ -7,13 +7,13 @@ clean:
 	rm -f labirint
 
 run_movies: movies
-	./movies
+	./movies -c1 test1.in r.out
 
 run_labirint: labirint
 	./labirint
 
 leaks_movies: movies
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./movies
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./movies -c1 test1.in r.out
 
 leaks_labirint: labirint
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./labirint

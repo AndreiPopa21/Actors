@@ -1,11 +1,12 @@
 #include "Graph.h"
 
-Graph* initializeGraph(int nodesCount){
+Graph* initializeGraph(){
     Graph* graph = (Graph*)calloc(1,sizeof(Graph));
-    graph->nodesCount = nodesCount;
-    graph->nodes = (AdjList**)calloc(nodesCount,sizeof(AdjList*));
+    graph->currentSize = 0;
+    graph->maxSize = GRAPH_SIZE_INCREMENT;
+    graph->nodes = (AdjList**)calloc(GRAPH_SIZE_INCREMENT,sizeof(AdjList*));
     int i;
-    for(i = 0; i < nodesCount; i++){
+    for(i = 0; i < GRAPH_SIZE_INCREMENT; i++){
         graph->nodes[i] = (AdjList*)calloc(1,sizeof(AdjList));
     }
     return graph;
@@ -17,8 +18,8 @@ void freeGraph(Graph** graph){
     }
     if((*graph)->nodes){
         int i;
-        int size = (*graph)->nodesCount;
-        for(i = 0; i < size; i++){
+        int totalSize = (*graph)->maxSize;
+        for(i = 0; i < totalSize; i++){
             freeAdjList(&((*graph)->nodes[i]));
         }
         free((*graph)->nodes);

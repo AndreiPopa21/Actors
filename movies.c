@@ -41,6 +41,7 @@ int main(int argc, char* argv[]){
             exit(0);
         }
 
+
     }else{
         fprintf(stdout,"You did not provide enough arguments\n");
         exit(0);

@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define GRAPH_SIZE_INCREMENT 50
+
 typedef struct AdjListNode{
     char* actorName;
     struct AdjListNode* next;
@@ -15,11 +17,12 @@ typedef struct AdjList{
 }AdjList;
 
 typedef struct Graph{
-    int nodesCount;
+    int maxSize;
+    int currentSize;
     struct AdjList** nodes;
 }Graph;
 
-Graph* initializeGraph(int nodesCount);
+Graph* initializeGraph();
 void freeGraph(Graph** graph);
 void freeAdjList(AdjList** list);
 

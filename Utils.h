@@ -6,4 +6,6 @@
 #include <string.h>
 #include "Graph.h"
 
+void resizeGraph(Graph** graph, int additionalSize);
+
 #endif
