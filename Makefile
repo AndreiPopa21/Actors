@@ -22,3 +22,8 @@ movies:
 	gcc -g -Wall -ansi movies.c Tasks.c Utils.c Graph.c -o movies
 labirint:
 	gcc -g -Wall -ansi labirint.c -o labirint
+
+push_m:
+	git push origin movies
+push_l:
+	git push origin labirint
