@@ -41,11 +41,17 @@ int main(int argc, char* argv[]){
             exit(0);
         }
         
+        
         Graph* graph = initializeGraph();
         char* name1 = "Theon";
         char* name2 = "Sansa";
+        char* name3 = "Bran";
+        char* name4 = "Arya";
         addListFor(&graph,name1);
         addListFor(&graph,name2);
+        addListFor(&graph,name3);
+        addEdge(&graph,name2,name3);
+        
 
         printGraph(&graph);
 

@@ -45,6 +45,55 @@ void addListFor(Graph** graph, char* name){
 
 }
 
+void addEdge(Graph** graph, char* actorName, char* partnerName){
+    if(!(*graph)){
+        fprintf(stdout,"Cannot add edge on NULL graph\n");
+        return;
+    }
+    if((actorName[0]=='\0') || (partnerName[0]=='\0')){
+        fprintf(stdout,"NULL names for adding edge\n");
+        return;
+    }
+    int i = 0;
+    int currentSize  = (*graph)->currentSize;
+    while(i < currentSize){
+        char* some = (*graph)->lists[i]->head->actorName;
+        if(!strcmp(some,actorName)){
+            pushNode(&((*graph)->lists[i]),partnerName);
+            break;
+        }
+        i++;
+    }
+    i = 0;
+    while(i < currentSize){
+        char* some = (*graph)->lists[i]->head->actorName;
+        if(!strcmp(some,partnerName)){
+            pushNode(&((*graph)->lists[i]),actorName);
+            break;
+        }
+        i++;
+    }
+}
+
+void pushNode(AdjList** list, char* newActorName){
+    if(!(*list)){
+        fprintf(stdout,"Cannot push to NULL list\n");
+        return;
+    }
+    AdjListNode* newNode = initializeNode(newActorName);
+
+    if(!((*list)->head)){
+        (*list)->head = newNode;
+        return;
+    }
+
+    AdjListNode* iter = (*list)->head;
+    while(iter->next){
+        iter = iter->next;
+    }
+    iter->next = newNode;
+}
+
 int checkNameDuplicate(Graph** graph, char* name){
     if(!(*graph)){
         return 1;
@@ -100,4 +149,31 @@ void printList(AdjList** list){
         iter = iter -> next;
     }
     fprintf(stdout,"NULL\n");
+}
+
+void pairActorsInList(Graph** graph, AdjList** list){
+
+    if(!(*graph)){
+        return;
+    }
+    if(!(*list)){
+        fprintf(stdout,"Cannot pair in NULL list\n");
+        return;
+    }
+    if(!((*list)->head)){
+        return;
+    }
+    if(!((*list)->head->next)){
+        return;
+    }
+    AdjListNode* primaryIter = (*list)->head;
+    AdjListNode* secondaryIter;
+    while(primaryIter){
+        secondaryIter = primaryIter->next;
+        while(secondaryIter){
+            addEdge(graph,primaryIter->actorName,secondaryIter->actorName);
+            secondaryIter =secondaryIter ->next;
+        }
+        primaryIter = primaryIter -> next;
+    }
 }
