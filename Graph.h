@@ -19,10 +19,11 @@ typedef struct AdjList{
 typedef struct Graph{
     int maxSize;
     int currentSize;
-    struct AdjList** nodes;
+    struct AdjList** lists;
 }Graph;
 
 Graph* initializeGraph();
+AdjListNode* initializeNode(char* actorName);
 void freeGraph(Graph** graph);
 void freeAdjList(AdjList** list);
 

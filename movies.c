@@ -41,6 +41,16 @@ int main(int argc, char* argv[]){
             exit(0);
         }
         
+        Graph* graph = initializeGraph();
+        char* name1 = "Theon";
+        char* name2 = "Sansa";
+        addListFor(&graph,name1);
+        addListFor(&graph,name2);
+
+        printGraph(&graph);
+
+        freeGraph(&graph);
+
     }else{
         fprintf(stdout,"You did not provide enough arguments\n");
         exit(0);
