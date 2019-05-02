@@ -16,8 +16,10 @@ AdjListNode* initializeNode(char* actorName){
     if(actorName[0] == '\0'){
         return NULL;
     }
+    char* newActorName = (char*)calloc(strlen(actorName)+1,sizeof(char));
+    strcpy(newActorName,actorName);
     AdjListNode* newNode = (AdjListNode*) calloc(1,sizeof(AdjListNode));
-    newNode->actorName = actorName;
+    newNode->actorName = newActorName;
     newNode->next = NULL;
     return newNode;
 }
@@ -44,6 +46,7 @@ void freeAdjList(AdjList** list){
     while((*list)->head){
         AdjListNode* tmp = (*list)->head;
         (*list)->head = (*list)->head->next;
+        free(tmp->actorName);
         free(tmp);
     }
     free((*list));

@@ -29,7 +29,7 @@ int main(int argc, char* argv[]){
 
         if(!strcmp(task,"-c1")){
             fprintf(stdout,"First task\n");
-            /*TaskOne(inputFile,outputFile);*/
+            TaskOne(inputFile,outputFile);
         }else if(!strcmp(task,"-c2")){
             fprintf(stdout,"Second task\n");
         }else if(!strcmp(task,"-c3")){
@@ -42,9 +42,10 @@ int main(int argc, char* argv[]){
         }
         
         
-        Graph* graph = initializeGraph();
-        char* name1 = "Theon";
-        char* name2 = "Sansa";
+
+        /*Graph* graph = initializeGraph();
+        char* name1 = "Theon\n";
+        char* name2 = "Sansa\n";
         char* name3 = "Bran";
         char* name4 = "Arya";
         AdjList* list = (AdjList*)calloc(1,sizeof(AdjList));
@@ -52,11 +53,14 @@ int main(int argc, char* argv[]){
         pushNode(&list,name2);
         pushNode(&list,name3);
         pushNode(&list,name1);
-        createLists(&graph,&list);
+        printList(&list);
+        /*pushNode(&list,name1);
+        /*createLists(&graph,&list);
         pairActorsInList(&graph,&list);
+        printList(&list);
         freeAdjList(&list);
         
-        list = (AdjList*)calloc(1,sizeof(AdjList));
+        /*list = (AdjList*)calloc(1,sizeof(AdjList));
         pushNode(&list,name2);
         pushNode(&list,name3);
         pushNode(&list,name4);
@@ -66,8 +70,8 @@ int main(int argc, char* argv[]){
         
 
         printGraph(&graph);
-        freeGraph(&graph);
-
+        freeGraph(&graph);*/
+        
     }else{
         fprintf(stdout,"You did not provide enough arguments\n");
         exit(0);

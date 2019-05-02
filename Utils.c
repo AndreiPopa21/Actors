@@ -90,15 +90,18 @@ void pushNode(AdjList** list, char* newActorName){
     AdjListNode* newNode = initializeNode(newActorName);
 
     if(!((*list)->head)){
+        fprintf(stdout,"Creating head with -------------------------->%s\n",newActorName);
         (*list)->head = newNode;
         return;
     }
 
     AdjListNode* iter = (*list)->head;
+
     while(iter->next){
         iter = iter->next;
     }
     iter->next = newNode;
+    fprintf(stdout,"Pushed node to list with name %s\n", newNode->actorName);
 }
 
 int checkNameDuplicate(Graph** graph, char* name){
@@ -184,6 +187,7 @@ void printList(AdjList** list){
         fprintf(stdout,"NULL list\n");
         return;
     }
+    fprintf(stdout,"Printing list...\n");
     AdjListNode* iter = (*list)->head;
     while(iter){
         fprintf(stdout,"%s -> ",iter->actorName);
