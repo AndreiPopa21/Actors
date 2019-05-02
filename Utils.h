@@ -20,6 +20,10 @@ void createLists(Graph** graph, AdjList** list);
 
 void resetVisitedStatus(Graph** graph);
 
+int determineConnectedComp(Graph** graph);
+
+void visitDFS(Graph** graph, AdjList** list);
+
 void printGraph(Graph** graph);
 void printList(AdjList** list);
 void printGraphNodes(Graph** graph);

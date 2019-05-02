@@ -44,9 +44,20 @@ void TaskOne(char* input, char* output){
         pairActorsInList(&graph,&bufferList);
         freeAdjList(&bufferList);
     }
-    printf("There are %d actors\n",actorsTotalCount);
    /* printGraphNodes(&graph);*/
-    printGraph(&graph);
+
+    int components = 0;
+    int currentSize = graph->currentSize;
+    for(i = 0; i < currentSize; i++){
+        if(!graph->lists[i]->head->visited){
+            components++;
+            visitDFS(&graph,&(graph->lists[i]));
+            printf("Finished\n");
+        }
+    }
+    printf("There are %d components\n",components);
+    resetVisitedStatus(&graph);
+    /*printGraph(&graph);*/
     freeGraph(&graph);
     fclose(fh);
 

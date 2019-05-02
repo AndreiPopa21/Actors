@@ -7,7 +7,7 @@ clean:
 	rm -f labirint
 
 run_movies: movies
-	./movies -c1 test1.in r.out
+	./movies -c1 test2.in r.out
 
 run_labirint: labirint
 	./labirint

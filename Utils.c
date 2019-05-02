@@ -274,3 +274,46 @@ void resetVisitedStatus(Graph** graph){
         (*graph)->lists[i]->head->visited = 0;
     }
 }
+
+int determineConnectedComp(Graph** graph){
+    if(!(*graph)){
+        return;
+    }
+    if(!((*graph)->lists)){
+        return;
+    }
+
+
+}
+
+void visitDFS(Graph** graph, AdjList** list){
+    if(!(*graph)){
+        return;
+    }
+    if(!(*list)){
+        return;
+    }
+    if(!((*graph)->lists)){
+        return;
+    }
+    if((*list)->head->visited){
+        return;
+    }
+    (*list)->head->visited = 1;
+    
+    AdjListNode* iter = (*list)->head->next;
+    while(iter){
+        char* name = iter->actorName;
+        int currentSize = (*graph)->currentSize;
+        int i;
+        for(i = 0; i < currentSize; i++){
+            if(!strcmp(name,(*graph)->lists[i]->head->actorName)){
+                if((*graph)->lists[i]->head->visited == 0){
+                    visitDFS(graph,&((*graph)->lists[i]));
+                }
+                break;
+            }
+        }
+        iter = iter->next;
+    }
+}
