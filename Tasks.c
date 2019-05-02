@@ -13,6 +13,8 @@ void TaskOne(char* input, char* output){
     char* actorName = NULL;
     char buffer[255]={'\0'};
 
+    Graph* graph = initializeGraph();
+
     fscanf(fh,"%d ",&moviesCount);
     /*fprintf(stdout,"%d\n",moviesCount); */
 
@@ -36,10 +38,13 @@ void TaskOne(char* input, char* output){
             /*fprintf(stdout,"%s",buffer);*/
            /* printf("Capul inca e: %s",bufferList->head->actorName);*/
         }
-        printList(&bufferList);
-        /*printf("%s ",bufferList->head->actorName);
-        */freeAdjList(&bufferList);
+        /*printList(&bufferList);*/
+        createLists(&graph,&bufferList);
+        pairActorsInList(&graph,&bufferList);
+        freeAdjList(&bufferList);
     }
+    printGraphNodes(&graph);
+    freeGraph(&graph);
     fclose(fh);
 
 }

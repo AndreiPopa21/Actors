@@ -55,6 +55,11 @@ void addEdge(Graph** graph, char* actorName, char* partnerName){
         return;
     }
 
+    if(!strcmp(actorName,partnerName)){
+        fprintf(stdout,"Cannot add edge to itself\n");
+        return;
+    }
+
     if(!checkEdgeDuplicate(graph,actorName,partnerName)){
         int i = 0;
         int currentSize  = (*graph)->currentSize;
@@ -87,11 +92,12 @@ void pushNode(AdjList** list, char* newActorName){
         fprintf(stdout,"Cannot push to NULL list\n");
         return;
     }
+
     AdjListNode* newNode = initializeNode(newActorName);
 
     if(!((*list)->head)){
-        fprintf(stdout,"Creating head with -------------------------->%s\n",newActorName);
-        (*list)->head = newNode;
+        /*fprintf(stdout,"Creating head with -------------------------->%s\n",newActorName);
+        */(*list)->head = newNode;
         return;
     }
 
@@ -101,7 +107,6 @@ void pushNode(AdjList** list, char* newActorName){
         iter = iter->next;
     }
     iter->next = newNode;
-    fprintf(stdout,"Pushed node to list with name %s\n", newNode->actorName);
 }
 
 int checkNameDuplicate(Graph** graph, char* name){
@@ -177,6 +182,20 @@ void printGraph(Graph** graph){
         printList(&((*graph)->lists[i]));
     }
     fprintf(stdout,"Current size: %d | Max size: %d\n",(*graph)->currentSize,(*graph)->maxSize);
+}
+
+void printGraphNodes(Graph** graph){
+    if(!(*graph)){
+        return;
+    }
+    if(!((*graph)->lists)){
+        return;
+    }
+    int currentSize = (*graph)->currentSize;
+    int i;
+    for( i = 0; i < currentSize; i++){
+        fprintf(stdout,"%s",(*graph)->lists[i]->head->actorName);
+    }
 }
 
 void printList(AdjList** list){
