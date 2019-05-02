@@ -21,6 +21,7 @@ AdjListNode* initializeNode(char* actorName){
     AdjListNode* newNode = (AdjListNode*) calloc(1,sizeof(AdjListNode));
     newNode->actorName = newActorName;
     newNode->next = NULL;
+    newNode->visited = 0;
     return newNode;
 }
 

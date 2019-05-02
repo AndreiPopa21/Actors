@@ -260,3 +260,17 @@ void createLists(Graph** graph, AdjList** list){
         iter = iter -> next;
     }
 }
+
+void resetVisitedStatus(Graph** graph){
+    if(!(*graph)){
+        return;
+    }
+    if(!((*graph)->lists)){
+        return;
+    }
+    int currentSize = (*graph)->currentSize;
+    int i;
+    for( i = 0; i < currentSize; i++){
+        (*graph)->lists[i]->head->visited = 0;
+    }
+}

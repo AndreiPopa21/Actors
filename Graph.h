@@ -10,6 +10,7 @@
 typedef struct AdjListNode{
     char* actorName;
     struct AdjListNode* next;
+    int visited;
 }AdjListNode;
 
 typedef struct AdjList{

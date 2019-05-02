@@ -18,6 +18,8 @@ void pairActorsInList(Graph** graph, AdjList** list);
 
 void createLists(Graph** graph, AdjList** list);
 
+void resetVisitedStatus(Graph** graph);
+
 void printGraph(Graph** graph);
 void printList(AdjList** list);
 void printGraphNodes(Graph** graph);

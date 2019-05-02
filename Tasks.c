@@ -20,6 +20,7 @@ void TaskOne(char* input, char* output){
 
 
     int i,j;
+    int actorsTotalCount = 0;
     for(i = 0; i < moviesCount; i++){
         /*movie title*/
         fgets(buffer,255,fh);
@@ -30,7 +31,7 @@ void TaskOne(char* input, char* output){
         /*actors count*/
         fscanf(fh,"%d ",&actorsCount);
         /*fprintf(stdout,"%d\n",actorsCount);*/
-        
+        actorsTotalCount +=actorsCount;
         /*each actor name*/
         for(j = 0; j < actorsCount; j++){
             fgets(buffer,255,fh);
@@ -43,7 +44,9 @@ void TaskOne(char* input, char* output){
         pairActorsInList(&graph,&bufferList);
         freeAdjList(&bufferList);
     }
-    printGraphNodes(&graph);
+    printf("There are %d actors\n",actorsTotalCount);
+   /* printGraphNodes(&graph);*/
+    printGraph(&graph);
     freeGraph(&graph);
     fclose(fh);
 
