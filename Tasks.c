@@ -3,14 +3,20 @@
 void TaskOne(char* input, char* output){
     
     FILE* fh = fopen(input,"r+");
+    FILE* wh = fopen(output,"w+");
+
     if(!fh){
+        fprintf(stdout,"Could not open input file\n");
         return;
     }
+    if(!wh){
+        fprintf(stdout,"Could not open output file\n");
+        return;
+    }
+
     int moviesCount = 0;
     int actorsCount = 0;
 
-    char* movieTitle = NULL;
-    char* actorName = NULL;
     char buffer[255]={'\0'};
 
     Graph* graph = initializeGraph();
@@ -56,9 +62,12 @@ void TaskOne(char* input, char* output){
         }
     }
     printf("There are %d components\n",components);
+    fprintf(wh,"%d\n",components);
+
     resetVisitedStatus(&graph);
-    /*printGraph(&graph);*/
+    
     freeGraph(&graph);
     fclose(fh);
+    fclose(wh);
 
 }

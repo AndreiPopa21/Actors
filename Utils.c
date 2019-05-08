@@ -277,13 +277,12 @@ void resetVisitedStatus(Graph** graph){
 
 int determineConnectedComp(Graph** graph){
     if(!(*graph)){
-        return;
+        return 0;
     }
     if(!((*graph)->lists)){
-        return;
+        return 0;
     }
-
-
+    return 0;
 }
 
 void visitDFS(Graph** graph, AdjList** list){

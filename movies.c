@@ -54,11 +54,11 @@ int main(int argc, char* argv[]){
         pushNode(&list,name3);
         pushNode(&list,name1);
         printList(&list);
-        /*pushNode(&list,name1);
-        /*createLists(&graph,&list);
+        pushNode(&list,name1);
+        createLists(&graph,&list);
         pairActorsInList(&graph,&list);
         printList(&list);
-        freeAdjList(&list);
+        freeAdjList(&list);*/
         
         /*list = (AdjList*)calloc(1,sizeof(AdjList));
         pushNode(&list,name2);
