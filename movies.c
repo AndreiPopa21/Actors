@@ -29,9 +29,10 @@ int main(int argc, char* argv[]){
 
         if(!strcmp(task,"-c1")){
             fprintf(stdout,"First task\n");
-            /*TaskOne(inputFile,outputFile);*/
+            TaskOne(inputFile,outputFile);
         }else if(!strcmp(task,"-c2")){
             fprintf(stdout,"Second task\n");
+            TaskTwo(inputFile,outputFile);
         }else if(!strcmp(task,"-c3")){
             fprintf(stdout,"Third task\n");
         }else if(!strcmp(task,"-b")){
@@ -41,11 +42,7 @@ int main(int argc, char* argv[]){
             exit(0);
         }
         
-        Queue* queue = initializeQueue();
-        printf("%d\n",dequeue(&queue));
-        printf("%d\n",dequeue(&queue));
-        displayQueue(&queue);
-        freeQueue(&queue);
+
         /*Graph* graph = initializeGraph();
         char* name1 = "Theon\n";
         char* name2 = "Sansa\n";

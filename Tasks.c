@@ -55,6 +55,22 @@ void TaskTwo(char* input, char* output){
         return;
     }
 
+    Graph* graph = initializeGraph();
+    createGraph(&graph,fh);
+
+    char* firstActor = (char*)calloc(255,sizeof(char));
+    char* secondActor = (char*)calloc(255,sizeof(char));
+
+    fgets(firstActor,255,fh);
+    fgets(secondActor,255,fh);
+
+    printf("%s",firstActor);
+    printf("%s",secondActor);
+
     fclose(fh);
     fclose(wh);
+
+    freeGraph(&graph);
+    free(firstActor);
+    free(secondActor);
 }
