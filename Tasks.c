@@ -62,9 +62,11 @@ void TaskOne(char* input, char* output){
         }
     }
     printf("There are %d components\n",components);
-    fprintf(wh,"%d\n",components);
 
     resetVisitedStatus(&graph);
+    
+    fprintf(wh,"%d\n",components);
+
     
     freeGraph(&graph);
     fclose(fh);

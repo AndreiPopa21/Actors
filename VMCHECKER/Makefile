@@ -1,6 +1,8 @@
+all: clean build
+
 build: movies.c labirint.c
-	gcc -g -Wall -ansi movies.c Tasks.c Utils.c Graph.c -o movies
-	gcc -g -Wall -ansi labirint.c -o labirint
+	gcc -g  -Wall -ansi movies.c Tasks.c Utils.c Graph.c -o movies
+	gcc -g  -Wall -ansi labirint.c -o labirint
 
 clean:
 	rm -f movies
