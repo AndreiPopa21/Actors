@@ -62,6 +62,9 @@ int topQueue(Queue** queue){
         fprintf(stdout,"Cannot perform top queue on NULL queue\n");
         return -1;
     }
+    if(!((*queue)->head)){
+        return -1;
+    }
 
     int value = (*queue)->head->value;
     return value;

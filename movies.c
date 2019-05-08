@@ -42,7 +42,6 @@ int main(int argc, char* argv[]){
             exit(0);
         }
         
-
         /*Graph* graph = initializeGraph();
         char* name1 = "Theon\n";
         char* name2 = "Sansa\n";

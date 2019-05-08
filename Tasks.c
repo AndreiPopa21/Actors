@@ -67,6 +67,10 @@ void TaskTwo(char* input, char* output){
     printf("%s",firstActor);
     printf("%s",secondActor);
 
+    int m = visitBFS(&graph,&firstActor,&secondActor);
+    fprintf(wh,"%d\n",m-1);
+    
+
     fclose(fh);
     fclose(wh);
 

@@ -21,11 +21,15 @@ void pairActorsInList(Graph** graph, AdjList** list);
 
 void createLists(Graph** graph, AdjList** list);
 
+int getGraphNode(Graph** graph, char** name);
+
 void resetVisitedStatus(Graph** graph);
 
 int determineConnectedComp(Graph** graph);
 
 void visitDFS(Graph** graph, AdjList** list);
+
+int visitBFS(Graph** graph, char** firstActor, char** secondActor);
 
 void printGraph(Graph** graph);
 void printList(AdjList** list);

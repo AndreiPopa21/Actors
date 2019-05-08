@@ -194,7 +194,7 @@ void printGraphNodes(Graph** graph){
     int currentSize = (*graph)->currentSize;
     int i;
     for( i = 0; i < currentSize; i++){
-        fprintf(stdout,"%s",(*graph)->lists[i]->head->actorName);
+        fprintf(stdout,"%d %s",i+1,(*graph)->lists[i]->head->actorName);
     }
 }
 
@@ -317,6 +317,50 @@ void visitDFS(Graph** graph, AdjList** list){
     }
 }
 
+int visitBFS(Graph** graph, char** firstActor, char** secondActor){
+    
+    if(!(*graph) || !(*firstActor) || !(*secondActor)){
+        return 0;
+    }
+    int distance = 0;
+
+    Queue* queue = initializeQueue();
+    int start = getGraphNode(graph,firstActor);
+    (*graph)->lists[start]->head->visited = 1;
+    enqueue(&queue,start);
+
+    int prevColor = (*graph)->lists[start]->head->visited;
+    int c = 0;
+    while(!isQueueEmpty(&queue)){
+
+        displayQueue(&queue);
+        start = dequeue(&queue);
+        
+        AdjListNode* iter = (*graph)->lists[start]->head->next;
+        while(iter){
+            int index = getGraphNode(graph,&(iter->actorName));
+            if((*graph)->lists[index]->head->visited==0){
+                
+                if(!strcmp((*secondActor),iter->actorName)){
+                    freeQueue(&queue);
+                    return prevColor + 1;
+                }
+                
+               
+                int nextIndex = getGraphNode(graph,&(iter->actorName));
+                (*graph)->lists[nextIndex]->head->visited = prevColor + 1;
+                enqueue(&queue,nextIndex);
+            }
+            iter = iter -> next;
+        }
+        c++;
+    }
+    printf("DADADA\n");
+    freeQueue(&queue);
+    
+    return prevColor;
+}
+
 void createGraph(Graph** graph, FILE* fh){
     if(!(*graph)){
         fprintf(stdout,"Cannot create on NULL graph\n");
@@ -357,4 +401,20 @@ void createGraph(Graph** graph, FILE* fh){
         pairActorsInList(graph,&bufferList);
         freeAdjList(&bufferList);
     }
+}
+
+int getGraphNode(Graph** graph, char** name){
+    if(!(*graph) || !(*name)){
+        return -1;
+    }
+    int i = 0;
+    int graphSize = (*graph)->currentSize;
+    for(i = 0; i < graphSize; i++){
+        char* n1 = (*graph)->lists[i]->head->actorName;
+        char* n2 = (*name);
+        if(!strcmp(n1,n2)){
+            return i;
+        }
+    }
+    return -1;
 }
