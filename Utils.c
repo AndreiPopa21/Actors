@@ -316,3 +316,45 @@ void visitDFS(Graph** graph, AdjList** list){
         iter = iter->next;
     }
 }
+
+void createGraph(Graph** graph, FILE* fh){
+    if(!(*graph)){
+        fprintf(stdout,"Cannot create on NULL graph\n");
+        return;
+    }
+    if(!fh){
+        return;
+    }
+
+    int moviesCount = 0;
+    int actorsCount = 0;
+    char buffer[255]={'\0'};
+
+    fscanf(fh,"%d ",&moviesCount);
+    
+    int i,j;
+    int actorsTotalCount = 0;
+    for(i = 0; i < moviesCount; i++){
+        /*movie title*/
+        fgets(buffer,255,fh);
+        AdjList* bufferList = (AdjList*)calloc(1,sizeof(AdjList));
+        bufferList->head  = NULL;
+
+        fprintf(stdout,"%s",buffer);
+        /*actors count*/
+        fscanf(fh,"%d ",&actorsCount);
+        /*fprintf(stdout,"%d\n",actorsCount);*/
+        actorsTotalCount +=actorsCount;
+        /*each actor name*/
+        for(j = 0; j < actorsCount; j++){
+            fgets(buffer,255,fh);
+            pushNode(&bufferList,buffer);
+            /*fprintf(stdout,"%s",buffer);*/
+           /* printf("Capul inca e: %s",bufferList->head->actorName);*/
+        }
+        /*printList(&bufferList);*/
+        createLists(graph,&bufferList);
+        pairActorsInList(graph,&bufferList);
+        freeAdjList(&bufferList);
+    }
+}

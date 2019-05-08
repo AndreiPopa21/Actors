@@ -7,7 +7,7 @@
 #include "Utils.h"
 
 void TaskOne(char* input, char* output);
-void TaskTwo();
+void TaskTwo(char* input, char* output);
 void TaskThree();
 void Bonus();
 

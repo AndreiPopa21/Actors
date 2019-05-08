@@ -12,6 +12,8 @@ void addEdge(Graph** graph, char* actorName, char* partnerName);
 int checkNameDuplicate(Graph** graph, char* name);
 int checkEdgeDuplicate(Graph** graph, char* first, char* second);
 
+void createGraph(Graph** graph, FILE* fh);
+
 void pushNode(AdjList** list, char* newActorName);
 
 void pairActorsInList(Graph** graph, AdjList** list);
