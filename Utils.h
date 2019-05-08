@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Graph.h"
+#include "Queue.h"
 
 void resizeGraph(Graph** graph);
 void addListFor(Graph** graph, char* name);

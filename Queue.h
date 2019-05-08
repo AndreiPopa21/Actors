@@ -25,6 +25,8 @@ int dequeue(Queue** queue);
 int topQueue(Queue** queue);
 int isQueueEmpty(Queue** queue);
 
+void displayQueue(Queue** queue);
+
 void freeQueue(Queue** queue);
 void freeQueueNode(QueueNode** queueNode);
 

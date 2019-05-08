@@ -45,11 +45,14 @@ int dequeue(Queue** queue){
     }
     int value = (*queue)->head->value;
     if(!((*queue)->head->next)){
+        freeQueueNode(&((*queue)->head));
         (*queue)->head = NULL;
         (*queue)->tail = NULL;
     }else{
         (*queue)->head->next->prev = NULL;
-        (*queue)->head = (*queue)->head->next;
+        QueueNode* newHead = (*queue)->head->next;
+        freeQueueNode(&((*queue)->head));
+        (*queue)->head = newHead;
     }
     return value;
 }
@@ -66,12 +69,27 @@ int topQueue(Queue** queue){
 
 int isQueueEmpty(Queue** queue){
     if(!(*queue)){
-        return;
+        return 1;
     }
     if(!((*queue)->head)){
         return 1;
     }
     return 0;
+}
+
+void displayQueue(Queue** queue){
+    if(!(*queue)){
+        fprintf(stdout,"NULL queue to print\n");
+        return;
+    }
+    QueueNode* iter = (*queue)->head;
+    fprintf(stdout,"Printing queue: ");
+    while(iter){
+        int value = iter->value;
+        fprintf(stdout,"-> %d ", value);
+        iter = iter->next;
+    }
+    fprintf(stdout,"-> NULL\n");
 }
 
 void freeQueue(Queue** queue){
@@ -81,7 +99,9 @@ void freeQueue(Queue** queue){
     }
     QueueNode* iter = (*queue)->head;
     while(iter){
-        freeQueueNode(&iter);
+        QueueNode* tmp = iter;
+        iter = iter->next;
+        freeQueueNode(&tmp);
     }
     free((*queue));
 }
@@ -93,6 +113,6 @@ void freeQueueNode(QueueNode** queueNode){
     }
     (*queueNode)->next = NULL;
     (*queueNode)->prev = NULL;
-    (*queueNode)->value = NULL;
+    (*queueNode)->value = 0;
     free((*queueNode));
 }
