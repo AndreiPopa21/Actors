@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Graph.h"
+#include "Queue.h"
 
 void resizeGraph(Graph** graph);
 void addListFor(Graph** graph, char* name);
@@ -12,17 +13,23 @@ void addEdge(Graph** graph, char* actorName, char* partnerName);
 int checkNameDuplicate(Graph** graph, char* name);
 int checkEdgeDuplicate(Graph** graph, char* first, char* second);
 
+void createGraph(Graph** graph, FILE* fh);
+
 void pushNode(AdjList** list, char* newActorName);
 
 void pairActorsInList(Graph** graph, AdjList** list);
 
 void createLists(Graph** graph, AdjList** list);
 
+int getGraphNode(Graph** graph, char** name);
+
 void resetVisitedStatus(Graph** graph);
 
 int determineConnectedComp(Graph** graph);
 
 void visitDFS(Graph** graph, AdjList** list);
+
+int visitBFS(Graph** graph, char** firstActor, char** secondActor);
 
 void printGraph(Graph** graph);
 void printList(AdjList** list);

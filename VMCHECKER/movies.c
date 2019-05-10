@@ -32,6 +32,7 @@ int main(int argc, char* argv[]){
             TaskOne(inputFile,outputFile);
         }else if(!strcmp(task,"-c2")){
             fprintf(stdout,"Second task\n");
+            TaskTwo(inputFile,outputFile);
         }else if(!strcmp(task,"-c3")){
             fprintf(stdout,"Third task\n");
         }else if(!strcmp(task,"-b")){
@@ -41,8 +42,6 @@ int main(int argc, char* argv[]){
             exit(0);
         }
         
-        
-
         /*Graph* graph = initializeGraph();
         char* name1 = "Theon\n";
         char* name2 = "Sansa\n";
