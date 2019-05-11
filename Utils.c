@@ -420,7 +420,7 @@ int getGraphNode(Graph** graph, char** name){
     return -1;
 }
 
-void puncteArticulatie(Graph** graph, int* idx, int* low){
+void puncteArticulatie(Graph** graph, int* idx, int* low, FILE* wh){
     
     if(!(*graph)){
         fprintf(stdout,"Puncte Articulatie on NULL graph\n");
@@ -432,16 +432,23 @@ void puncteArticulatie(Graph** graph, int* idx, int* low){
         idx[i] = -1;
         low[i] = INF;
     }
-
+    Queue* queue = initializeQueue();
     for(i = 0; i < (*graph)->currentSize; i++){
         if(idx[i] == -1){
-            dfsCV(graph,i,timp,idx,low);
+            dfsCV(graph,i,timp,idx,low, &queue);
         }
     }
+    fprintf(wh,"%d\n", getQueueSize(&queue));
+    int initialSize = getQueueSize(&queue);
+    for(i = 0; i < initialSize; i++){
+        int t = dequeue(&queue);
+        fprintf(wh,"%s",(*graph)->lists[t]->head->actorName);
+    }
 
+    freeQueue(&queue);
 }
 
-void dfsCV(Graph** graph, int v, int timp, int* idx, int* low){
+void dfsCV(Graph** graph, int v, int timp, int* idx, int* low, Queue** queue){
     
     if(!(*graph)){
         return;
@@ -456,7 +463,7 @@ void dfsCV(Graph** graph, int v, int timp, int* idx, int* low){
         int iterIndex = getGraphNode(graph,&(iter->actorName));
         if(idx[iterIndex] == -1){
             enqueue(&children,iterIndex);
-            dfsCV(graph,iterIndex,timp,idx,low);
+            dfsCV(graph,iterIndex,timp,idx,low, queue);
             if(low[v] < low[iterIndex]){
                 low[v] = low[v];
             }else{
@@ -474,7 +481,8 @@ void dfsCV(Graph** graph, int v, int timp, int* idx, int* low){
     }
     if(idx[v] == 0){
         if(getQueueSize(&children) >= 2){
-            printf("%s",(*graph)->lists[v]->head->actorName);
+            /*printf("%s",(*graph)->lists[v]->head->actorName);*/
+            enqueue(queue, v);
         }
     }else{
         int isArticulation = 0;
@@ -485,7 +493,8 @@ void dfsCV(Graph** graph, int v, int timp, int* idx, int* low){
             }
         }
         if(isArticulation){
-            printf("%s",(*graph)->lists[v]->head->actorName);
+            /*printf("%s",(*graph)->lists[v]->head->actorName);*/
+            enqueue(queue,v);
         }
     }
     freeQueue(&children);

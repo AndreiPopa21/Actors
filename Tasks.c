@@ -107,7 +107,9 @@ void TaskThree(char* input, char* output){
     int* idx = (int*)calloc(graph->currentSize,sizeof(int));
     int* low = (int*)calloc(graph->currentSize,sizeof(int));
 
-    puncteArticulatie(&graph,idx,low);
+    
+    puncteArticulatie(&graph,idx,low,wh);
+
 
     free(idx);
     free(low);
