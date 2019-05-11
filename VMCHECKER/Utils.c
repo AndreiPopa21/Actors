@@ -329,36 +329,37 @@ int visitBFS(Graph** graph, char** firstActor, char** secondActor){
     (*graph)->lists[start]->head->visited = 1;
     enqueue(&queue,start);
 
-    int prevColor = (*graph)->lists[start]->head->visited;
-    int c = 0;
+    int prevColor = 1;
+    
     while(!isQueueEmpty(&queue)){
 
-        displayQueue(&queue);
+        /*displayQueue(&queue);*/
         start = dequeue(&queue);
-        
+        prevColor = (*graph)->lists[start]->head->visited;
         AdjListNode* iter = (*graph)->lists[start]->head->next;
+
         while(iter){
             int index = getGraphNode(graph,&(iter->actorName));
             if((*graph)->lists[index]->head->visited==0){
                 
-                if(!strcmp((*secondActor),iter->actorName)){
+                /*if(!strcmp((*secondActor),iter->actorName)){
                     freeQueue(&queue);
                     return prevColor + 1;
-                }
+                }*/
                 
-               
-                int nextIndex = getGraphNode(graph,&(iter->actorName));
-                (*graph)->lists[nextIndex]->head->visited = prevColor + 1;
-                enqueue(&queue,nextIndex);
+                (*graph)->lists[index]->head->visited = prevColor + 1;
+                enqueue(&queue,index);
             }
             iter = iter -> next;
         }
-        c++;
+        
     }
     printf("DADADA\n");
     freeQueue(&queue);
     
-    return prevColor;
+    int final = getGraphNode(graph,secondActor);
+    distance = (*graph)->lists[final]->head->visited;
+    return distance;
 }
 
 void createGraph(Graph** graph, FILE* fh){
