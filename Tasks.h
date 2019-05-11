@@ -8,7 +8,7 @@
 
 void TaskOne(char* input, char* output);
 void TaskTwo(char* input, char* output);
-void TaskThree();
+void TaskThree(char* input, char* output);
 void Bonus();
 
 #endif

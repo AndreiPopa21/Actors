@@ -7,6 +7,8 @@
 #include "Graph.h"
 #include "Queue.h"
 
+#define INF 100000000
+
 void resizeGraph(Graph** graph);
 void addListFor(Graph** graph, char* name);
 void addEdge(Graph** graph, char* actorName, char* partnerName);
@@ -30,6 +32,9 @@ int determineConnectedComp(Graph** graph);
 void visitDFS(Graph** graph, AdjList** list);
 
 int visitBFS(Graph** graph, char** firstActor, char** secondActor);
+
+void puncteArticulatie(Graph** graph,int* idx, int* low);
+void dfsCV(Graph** graph, int v, int timp, int* idx, int* low);
 
 void printGraph(Graph** graph);
 void printList(AdjList** list);

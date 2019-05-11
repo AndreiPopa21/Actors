@@ -80,6 +80,22 @@ int isQueueEmpty(Queue** queue){
     return 0;
 }
 
+int getQueueSize(Queue** queue){
+    if(!(*queue)){
+        return 0;
+    }
+    if(!((*queue)->head)){
+        return 0;
+    }
+    int size = 0;
+    QueueNode* iter = (*queue)->head;
+    while(iter){
+        size = size + 1;
+        iter = iter -> next;
+    }
+    return size;
+}
+
 void displayQueue(Queue** queue){
     if(!(*queue)){
         fprintf(stdout,"NULL queue to print\n");
