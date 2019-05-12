@@ -3,8 +3,11 @@
 
 #include "Tasks.h"
 
+/*fisier sursa pentru rezolvarea primei probleme*/
+
 int main(int argc, char* argv[]){
 
+    //verificarea a numarului corect de argumente
     if(argc == 4){
         fprintf(stdout,"You gave enough arguments\n");
         char* task = argv[1];
@@ -13,6 +16,7 @@ int main(int argc, char* argv[]){
 
         printf("%s\n",task);
 
+        //verificarea fisierelor de input si output
         FILE* input = fopen(inputFile,"r+");
         if(!input){
             fprintf(stdout,"Could not open input file\n");
@@ -27,6 +31,7 @@ int main(int argc, char* argv[]){
         }
         fclose(output);
 
+        //rezolvarea task-ului corespunzator
         if(!strcmp(task,"-c1")){
             fprintf(stdout,"First task\n");
             TaskOne(inputFile,outputFile);

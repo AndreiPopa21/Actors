@@ -1,7 +1,7 @@
 #include "Tasks.h"
 
 
-
+/*functie pentru rezolvarea primului task*/
 void TaskOne(char* input, char* output){
     
     FILE* fh = fopen(input,"r+");
@@ -44,6 +44,7 @@ void TaskOne(char* input, char* output){
 
 }
 
+/*functie pentru rezolvarea task-ului 2*/
 void TaskTwo(char* input, char* output){
     FILE* fh = fopen(input,"r+");
     FILE* wh = fopen(output,"w+");
@@ -86,6 +87,7 @@ void TaskTwo(char* input, char* output){
     free(secondActor);
 }
 
+/*functie pentru rezolvarea task-ului 3*/
 void TaskThree(char* input, char* output){
     FILE* fh = fopen(input,"r+");
     FILE* wh = fopen(output,"w+");
