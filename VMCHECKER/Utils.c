@@ -419,3 +419,83 @@ int getGraphNode(Graph** graph, char** name){
     }
     return -1;
 }
+
+void puncteArticulatie(Graph** graph, int* idx, int* low, FILE* wh){
+    
+    if(!(*graph)){
+        fprintf(stdout,"Puncte Articulatie on NULL graph\n");
+        return;
+    }
+    int timp = 0;
+    int i;
+    for(i = 0; i < (*graph)->currentSize; i++){
+        idx[i] = -1;
+        low[i] = INF;
+    }
+    Queue* queue = initializeQueue();
+    for(i = 0; i < (*graph)->currentSize; i++){
+        if(idx[i] == -1){
+            dfsCV(graph,i,timp,idx,low, &queue);
+        }
+    }
+    fprintf(wh,"%d\n", getQueueSize(&queue));
+    int initialSize = getQueueSize(&queue);
+    for(i = 0; i < initialSize; i++){
+        int t = dequeue(&queue);
+        fprintf(wh,"%s",(*graph)->lists[t]->head->actorName);
+    }
+
+    freeQueue(&queue);
+}
+
+void dfsCV(Graph** graph, int v, int timp, int* idx, int* low, Queue** queue){
+    
+    if(!(*graph)){
+        return;
+    }
+    idx[v] = timp;
+    low[v] = timp;
+
+    timp = timp + 1;
+    Queue* children = initializeQueue();
+    AdjListNode* iter = (*graph)->lists[v]->head->next;
+    while(iter){
+        int iterIndex = getGraphNode(graph,&(iter->actorName));
+        if(idx[iterIndex] == -1){
+            enqueue(&children,iterIndex);
+            dfsCV(graph,iterIndex,timp,idx,low, queue);
+            if(low[v] < low[iterIndex]){
+                low[v] = low[v];
+            }else{
+                low[v] = low[iterIndex];
+            }
+        }
+        else{
+            if(low[v] < idx[iterIndex]){
+                low[v] = low[v];
+            }else{
+                low[v] = idx[iterIndex];
+            }
+        }
+        iter = iter -> next;
+    }
+    if(idx[v] == 0){
+        if(getQueueSize(&children) >= 2){
+            /*printf("%s",(*graph)->lists[v]->head->actorName);*/
+            enqueue(queue, v);
+        }
+    }else{
+        int isArticulation = 0;
+        while(getQueueSize(&children) > 0){
+            int u = dequeue(&children);
+            if(low[u] >= idx[v]){
+                isArticulation = 1;
+            }
+        }
+        if(isArticulation){
+            /*printf("%s",(*graph)->lists[v]->head->actorName);*/
+            enqueue(queue,v);
+        }
+    }
+    freeQueue(&children);
+}

@@ -1,5 +1,7 @@
 #include "Tasks.h"
 
+
+
 void TaskOne(char* input, char* output){
     
     FILE* fh = fopen(input,"r+");
@@ -70,7 +72,7 @@ void TaskTwo(char* input, char* output){
     int m = visitBFS(&graph,&firstActor,&secondActor);
 
     if(!m){
-        fprintf(wh,"-1");
+        fprintf(wh,"-1\n");
     }else{
         fprintf(wh,"%d\n",m-1);
     }
@@ -82,4 +84,37 @@ void TaskTwo(char* input, char* output){
     freeGraph(&graph);
     free(firstActor);
     free(secondActor);
+}
+
+void TaskThree(char* input, char* output){
+    FILE* fh = fopen(input,"r+");
+    FILE* wh = fopen(output,"w+");
+    
+    if(!fh){
+        fprintf(stdout,"Could not open input file\n");
+        return;
+    }
+    if(!wh){
+        fprintf(stdout,"Could not open output file\n");
+        return;
+    }
+
+    Graph* graph = initializeGraph();
+    createGraph(&graph,fh);
+
+    printf("Numarul de noduri: %d\n",graph->currentSize);
+
+    int* idx = (int*)calloc(graph->currentSize,sizeof(int));
+    int* low = (int*)calloc(graph->currentSize,sizeof(int));
+
+    
+    puncteArticulatie(&graph,idx,low,wh);
+
+
+    free(idx);
+    free(low);
+
+    fclose(fh);
+    fclose(wh);
+    freeGraph(&graph);
 }

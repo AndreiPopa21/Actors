@@ -439,11 +439,44 @@ void puncteArticulatie(Graph** graph, int* idx, int* low, FILE* wh){
         }
     }
     fprintf(wh,"%d\n", getQueueSize(&queue));
+    
     int initialSize = getQueueSize(&queue);
-    for(i = 0; i < initialSize; i++){
+    /*for(i = 0; i < initialSize; i++){
         int t = dequeue(&queue);
         fprintf(wh,"%s",(*graph)->lists[t]->head->actorName);
+    }*/
+    int actorsCount = getQueueSize(&queue);
+    char** actors = (char**)calloc(actorsCount,sizeof(char*));
+    for(i = 0; i < actorsCount; i++){
+        actors[i] = (char*)calloc(255,sizeof(char));
     }
+
+    for(i = 0; i < initialSize; i++){
+        int t = dequeue(&queue);
+        strcpy(actors[i],(*graph)->lists[t]->head->actorName);
+    }
+
+    int j;
+    int toSort = 1;
+    char temp[255];
+    while(toSort){
+        toSort = 0;
+        for(j = 0; j < actorsCount-1; j++){
+            if(strcmp(actors[j],actors[j+1]) > 0){
+                strcpy(temp,actors[j]);
+                strcpy(actors[j],actors[j+1]);
+                strcpy(actors[j+1],temp);
+                toSort = 1;
+            }
+        }
+    }
+    for(i = 0; i <actorsCount; i++){
+        fprintf(wh,"%s",actors[i]);
+    }
+    for(i = 0; i<actorsCount;i++){
+        free(actors[i]);
+    }
+    free(actors);
 
     freeQueue(&queue);
 }
