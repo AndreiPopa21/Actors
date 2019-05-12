@@ -120,3 +120,26 @@ void TaskThree(char* input, char* output){
     fclose(wh);
     freeGraph(&graph);
 }
+
+void Bonus(char* input,char* output){
+    FILE* fh = fopen(input,"r+");
+    FILE* wh = fopen(output,"w+");
+    
+    if(!fh){
+        fprintf(stdout,"Could not open input file\n");
+        return;
+    }
+    if(!wh){
+        fprintf(stdout,"Could not open output file\n");
+        return;
+    }
+
+    Graph* graph = initializeGraph();
+    createGraph(&graph,fh);
+
+    fprintf(wh,"0");
+
+    fclose(fh);
+    fclose(wh);
+    freeGraph(&graph);
+}   
