@@ -1,5 +1,6 @@
 #include "Utils.h"
 
+/*functie care face resize la un graf primit ca argument*/
 void resizeGraph(Graph** graph){
     if(!(*graph)){
         fprintf(stdout,"Cannot resize NULL graph\n");
@@ -16,6 +17,7 @@ void resizeGraph(Graph** graph){
     (*graph)->maxSize = newMaxSize;
 }
 
+/*adauga o noua intrare in graf pentru un actor*/
 void addListFor(Graph** graph, char* name){
     if(!(*graph)){
         fprintf(stdout,"Cannot add list in a NULL graph\n");
@@ -45,6 +47,7 @@ void addListFor(Graph** graph, char* name){
 
 }
 
+/*adauga o latura noua in graf de la un nume la altul*/
 void addEdge(Graph** graph, char* actorName, char* partnerName){
     if(!(*graph)){
         fprintf(stdout,"Cannot add edge on NULL graph\n");
@@ -87,6 +90,7 @@ void addEdge(Graph** graph, char* actorName, char* partnerName){
     }
 }
 
+/*functie de adaugare intr-o lista de adiacenta*/
 void pushNode(AdjList** list, char* newActorName){
     if(!(*list)){
         fprintf(stdout,"Cannot push to NULL list\n");
@@ -109,6 +113,7 @@ void pushNode(AdjList** list, char* newActorName){
     iter->next = newNode;
 }
 
+/*functie care verifica daca s-a creat deja o intrare pentru un nume*/
 int checkNameDuplicate(Graph** graph, char* name){
     if(!(*graph)){
         return 1;
@@ -137,6 +142,7 @@ int checkNameDuplicate(Graph** graph, char* name){
     return 0;
 }
 
+/*functie care verifica daca s-a creat deja o latura specifica in graf*/
 int checkEdgeDuplicate(Graph** graph, char* first, char* second){
     if(!(*graph)){
         return 1;
@@ -171,6 +177,7 @@ int checkEdgeDuplicate(Graph** graph, char* first, char* second){
     return 0;
 }
 
+/*functie care afiseaza graf-ul*/
 void printGraph(Graph** graph){
     if(!(*graph)){
         return;
@@ -184,6 +191,7 @@ void printGraph(Graph** graph){
     fprintf(stdout,"Current size: %d | Max size: %d\n",(*graph)->currentSize,(*graph)->maxSize);
 }
 
+/*functie care afiseaza nodurile grafului*/
 void printGraphNodes(Graph** graph){
     if(!(*graph)){
         return;
@@ -198,6 +206,7 @@ void printGraphNodes(Graph** graph){
     }
 }
 
+/*functie care printeaza o lista de adiacenta*/
 void printList(AdjList** list){
     if(!(*list)){
         return;
@@ -215,6 +224,7 @@ void printList(AdjList** list){
     fprintf(stdout,"NULL\n");
 }
 
+/*functie care ajuta la crearea listelor de adiacenta pentru un titlu de film*/
 void pairActorsInList(Graph** graph, AdjList** list){
 
     if(!(*graph)){
@@ -242,6 +252,7 @@ void pairActorsInList(Graph** graph, AdjList** list){
     }
 }
 
+/*functie care creeaza intrari intr-un graf cu nume dintr-o lista*/
 void createLists(Graph** graph, AdjList** list){
     if(!(*graph)){
         return;
@@ -261,6 +272,7 @@ void createLists(Graph** graph, AdjList** list){
     }
 }
 
+/*reseteaza statutul de vizitat al nodurilor grafului*/
 void resetVisitedStatus(Graph** graph){
     if(!(*graph)){
         return;
@@ -275,16 +287,8 @@ void resetVisitedStatus(Graph** graph){
     }
 }
 
-int determineConnectedComp(Graph** graph){
-    if(!(*graph)){
-        return 0;
-    }
-    if(!((*graph)->lists)){
-        return 0;
-    }
-    return 0;
-}
-
+/*functie utilizata la primul task pentru determinarea componentelor conexe*/
+/*se parcurge prin DFS graful si se numara subarborii rezultati*/
 void visitDFS(Graph** graph, AdjList** list){
     if(!(*graph)){
         return;
@@ -317,6 +321,8 @@ void visitDFS(Graph** graph, AdjList** list){
     }
 }
 
+/*functie care viziteaza nodurile grafului prin BFS*/
+/*functie utilizata la task-ul doi pentru determinarea distantei intre doua noduri*/
 int visitBFS(Graph** graph, char** firstActor, char** secondActor){
     
     if(!(*graph) || !(*firstActor) || !(*secondActor)){
@@ -362,6 +368,8 @@ int visitBFS(Graph** graph, char** firstActor, char** secondActor){
     return distance;
 }
 
+/*functie care creeaza un graf cu informatiile dintr-un fisier*/
+/*functie utilizata la fiecare task pentru citirea datelor din fisier*/
 void createGraph(Graph** graph, FILE* fh){
     if(!(*graph)){
         fprintf(stdout,"Cannot create on NULL graph\n");
@@ -404,6 +412,7 @@ void createGraph(Graph** graph, FILE* fh){
     }
 }
 
+/*functie care intoarce index-ul nodului intr-un graf care contine numele dat ca argument*/
 int getGraphNode(Graph** graph, char** name){
     if(!(*graph) || !(*name)){
         return -1;
@@ -420,6 +429,7 @@ int getGraphNode(Graph** graph, char** name){
     return -1;
 }
 
+/*functie utilizata la task-ul 3 pentru determinarea punctelor de articulatie*/
 void puncteArticulatie(Graph** graph, int* idx, int* low, FILE* wh){
     
     if(!(*graph)){
@@ -481,6 +491,8 @@ void puncteArticulatie(Graph** graph, int* idx, int* low, FILE* wh){
     freeQueue(&queue);
 }
 
+/*functie utilizata la task-ul 3 pentru parcurgerea prin DFS a grafului*/
+/*si pentru determinarea punctelor de articulatie*/
 void dfsCV(Graph** graph, int v, int timp, int* idx, int* low, Queue** queue){
     
     if(!(*graph)){
